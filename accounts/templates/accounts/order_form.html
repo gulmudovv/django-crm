@@ -1,0 +1,26 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<div style="padding:10px;" class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+			<p style="padding:10px; ">Клиент - <strong>{{ customer.name }}</strong></p>
+			<form style = "padding: 10px;" action="" method="POST">
+				{% csrf_token %}
+				{{ formset.management_form }}
+				{% for form in formset %}
+				{{ form }}
+				<hr>
+				{% endfor %}
+
+				<input style = "margin: 10px;" class="btn btn-sm btn-info" type="submit" name="Submit">
+
+			</form>
+	    </div>
+	</div>
+</div>	
+
+
+{% endblock %}

@@ -4,37 +4,56 @@
 {% include 'accounts/status.html '%}	
 	<br>
 
-<div class="row">
+<div style="padding:10px;" class="row">
 	<div class="col-md-5">
-		<h5>CUSTOMERS:</h5>
+		<h5>Покупатели:</h5>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a>
+			<a class="btn btn-primary  btn-sm btn-block" href="">Создать клиента</a>
 			<table class="table table-sm">
 				<tr>
-					<th></th>
-					<th>Customer</th>
-					<th>Orders</th>
+					<tn></tn>
+					<th>Покупатель</th>
+					<th>Номер телефона</th>
 				</tr>
-
+				{% for customer in customers %}
+				<tr>
+					
+					<td>{{customer.name}}</td>
+					<td>{{customer.phone}}</td>
+					<td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">Смотреть</a></td>
+					
+					
+				</tr>
+					{% endfor %}
 			</table>
 		</div>
 	</div>
 
 	<div class="col-md-7">
-		<h5>LAST 5 ORDERS</h5>
+		<h5>Последние 5 заказов</h5>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href="">Create Order</a>
+			
 			<table class="table table-sm">
 				<tr>
-					<th>Product</th>
-					<th>Date Orderd</th>
-					<th>Status</th>
-					<th>Update</th>
-					<th>Remove</th>
+					<th>Продукт</th>
+					<th>Дата заказа</th>
+					<th>Статус заказа</th>
+					<th>Изменить</th>
+					<th>Удалить</th>
 				</tr>
-		
+				{% for order in orders %}
+				<tr>
+					<td>{{order.product.name}}</td>
+					<td>{{order.date_created}}</td>
+					<td>{{order.status}}</td>
+					<td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Изменить</a></td>
+					<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Удалить</a></td>
+
+				</tr>
+				{% endfor %}
+
 			</table>
 		</div>
 	</div>
